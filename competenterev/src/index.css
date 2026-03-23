@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg-base:    #07080f;
+  --bg-surface: #0d1117;
+  --bg-raised:  #161b24;
+  --bg-hover:   #1c2333;
+
+  --border-default: rgba(255,255,255,.08);
+  --border-subtle:  rgba(255,255,255,.05);
+  --border-strong:  rgba(255,255,255,.15);
+
+  --text-primary:   #f0f4ff;
+  --text-secondary: #9ba3b4;
+  --text-muted:     #6b7587;
+  --text-disabled:  #3d4557;
+
+  --accent-primary: #4f7fff;
+  --accent-emerald: #10b981;
+  --accent-amber:   #f59e0b;
+  --accent-red:     #ef4444;
+  --accent-violet:  #8b5cf6;
+  --accent-cyan:    #06b6d4;
+
+  --r-sm:  4px;
+  --r-md:  8px;
+  --r-lg:  12px;
+  --r-xl:  16px;
+  --r-2xl: 20px;
+  --r-full: 999px;
+
+  --sidebar-w: 220px;
+  --sidebar-collapsed-w: 60px;
+
+  color-scheme: dark;
+}
+
+/* ── Base ───────────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.2); }
+
+/* ── Animations ─────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .5; }
+}
+
+.animate-fade-in  { animation: fadeIn  .2s ease both; }
+.animate-slide-up { animation: slideUp .22s cubic-bezier(.2,.8,.3,1) both; }
+.animate-slide-in { animation: slideIn .2s ease both; }
+
+/* ── Utility ────────────────────────────────────────────────────── */
+.page-wrap {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn .2s ease both;
+}
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-xl);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--r-md);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  border: 1px solid transparent;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--accent-primary);
+  color: #fff;
+  border-color: var(--accent-primary);
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost {
+  background: var(--bg-raised);
+  color: var(--text-secondary);
+  border-color: var(--border-default);
+}
+.btn-ghost:hover { background: var(--bg-hover); color: var(--text-primary); }
+.btn-sm { padding: 5px 10px; font-size: 11px; }
+.btn-danger { background: rgba(239,68,68,.12); color: var(--accent-red); border-color: rgba(239,68,68,.3); }
+.btn-danger:hover { background: rgba(239,68,68,.2); }
+
+/* Inputs */
+input, select, textarea {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color .12s;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--accent-primary); }
+input::placeholder, textarea::placeholder { color: var(--text-disabled); }
+
+/* ── Toast ──────────────────────────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  box-shadow: 0 8px 32px rgba(0,0,0,.6);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideUp .2s ease both;
+  pointer-events: auto;
+}
